@@ -1,11 +1,38 @@
 # Installation Guide
 
-This guide explains how to install and run the Munt node container on Linux (Ubuntu/Debian recommended).
+This guide explains how to install and run the Munt node container on Linux (Ubuntu 22.04+ or Debian recommended).
 
 ## Prerequisites
 
 - Docker Engine
 - Docker Compose v2 (`docker compose`)
+
+## Ubuntu 22.04+ notes
+
+On some Ubuntu systems (22.04, 24.04, and newer), you may need to install both Docker and Compose tooling explicitly:
+
+```bash
+sudo apt update
+sudo apt install -y docker.io docker-compose docker-compose-v2
+```
+
+Depending on your setup, Docker commands may require root privileges:
+
+```bash
+sudo docker compose up -d --build
+```
+
+or (legacy command):
+
+```bash
+sudo docker-compose up -d --build
+```
+
+If you want to run Docker without `sudo`, add your user to the `docker` group and log out/in:
+
+```bash
+sudo usermod -aG docker "$USER"
+```
 
 ## 1. Clone the repository
 

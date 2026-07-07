@@ -9,7 +9,7 @@ Run a Munt full node in Docker with a reproducible, Linux-first setup.
 - 🔄 Automatic restart
 - 🔒 Secure default configuration
 - 🐳 Docker & Docker Compose support
-- 🐧 Linux-first (Ubuntu/Debian)
+- 🐧 Linux-first (Ubuntu 22.04+ / Debian)
 - 📦 Reproducible builds
 
 ## What This Project Provides

@@ -30,12 +30,16 @@ RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/
 
 RUN useradd -r -m -d /home/munt munt
 
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+
 COPY --from=build /src/munt/build/src/Munt-daemon /usr/local/bin/Munt-daemon
 COPY --from=build /src/munt/build/src/Munt-cli /usr/local/bin/Munt-cli
 
 RUN chmod +x /usr/local/bin/Munt-daemon /usr/local/bin/Munt-cli
 
-USER munt
 WORKDIR /home/munt
 
 EXPOSE 9231 9232
