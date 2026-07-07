@@ -5,7 +5,9 @@ daemon=0
 port=9231
 rpcport=9232
 
-addnode=188.166.12.74:9231
+addnode=node1.abyte.eu
+addnode=node2.abyte.eu
+addnode=188.166.12.74
 
 rpcbind=0.0.0.0
 rpcallowip=172.16.0.0/12
