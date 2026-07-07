@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
-DATADIR="${MUNT_DATADIR:-/home/munt/.munt}"
+DATADIR="/home/munt/.munt"
 
 mkdir -p "$DATADIR"
+mkdir -p "$DATADIR/blocks"
+mkdir -p "$DATADIR/chainstate"
 
-if [ "$(id -u)" = "0" ]; then
-  chown -R munt:munt "$DATADIR"
-  exec gosu munt "$@"
-fi
+chown -R munt:munt "$DATADIR"
 
-exec "$@"
+exec gosu munt "$@"
