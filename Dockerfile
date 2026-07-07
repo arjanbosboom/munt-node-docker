@@ -6,11 +6,13 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /src
+
 # Temporary source repository:
 # We currently clone from the maintainer fork because it contains changes
 # that are still pending merge in the official upstream repository.
 # Official upstream: https://github.com/muntorg/munt-official
 RUN git clone https://github.com/arjanbosboom/munt-official.git munt
+
 WORKDIR /src/munt
 
 RUN ./autogen.sh
@@ -26,23 +28,26 @@ RUN mkdir build && cd build && \
 
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    gosu \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN groupadd -g 1000 munt && \
     useradd -u 1000 -g munt -m -d /home/munt munt
-
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
-ENTRYPOINT ["docker-entrypoint.sh"]
 
 COPY --from=build /src/munt/build/src/Munt-daemon /usr/local/bin/Munt-daemon
 COPY --from=build /src/munt/build/src/Munt-cli /usr/local/bin/Munt-cli
 
 RUN chmod +x /usr/local/bin/Munt-daemon /usr/local/bin/Munt-cli
 
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 WORKDIR /home/munt
 
 EXPOSE 9231 9232
+
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 CMD ["Munt-daemon", "-datadir=/home/munt/.munt", "-printtoconsole"]
