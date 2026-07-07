@@ -1,0 +1,13 @@
+server=1
+listen=1
+daemon=0
+
+port=9231
+rpcport=9232
+
+addnode=188.166.12.74:9231
+
+rpcbind=0.0.0.0
+rpcallowip=172.16.0.0/12
+rpcuser=muntuser
+rpcpassword=change-this-long-random-password
