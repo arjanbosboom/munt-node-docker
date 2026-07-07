@@ -10,7 +10,7 @@ This guide explains how to install and run the Munt node container on Linux (Ubu
 ## 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-user>/munt-node-docker.git
+git clone https://github.com/arjanbosboom/munt-node-docker.git
 cd munt-node-docker
 ```
 
