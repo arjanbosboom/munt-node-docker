@@ -3,12 +3,15 @@ services:
     build: .
     container_name: munt-node
     restart: unless-stopped
+
     ports:
       - "9231:9231"
       - "127.0.0.1:9232:9232"
+
     volumes:
       - ./data:/home/munt/.munt
       - ./config/munt.conf:/home/munt/munt.conf:ro
+
     command:
       - Munt-daemon
       - -datadir=/home/munt/.munt
