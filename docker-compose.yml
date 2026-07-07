@@ -8,10 +8,10 @@ services:
       - "127.0.0.1:9232:9232"
     volumes:
       - ./data:/home/munt/.munt
-      - ./config/munt.conf:/home/munt/.munt/Munt.conf:ro
+      - ./config/munt.conf:/home/munt/munt.conf:ro
     command:
       - Munt-daemon
       - -datadir=/home/munt/.munt
-      - -conf=/home/munt/.munt/Munt.conf
+      - -conf=/home/munt/munt.conf
       - -daemon=0
       - -printtoconsole=1
