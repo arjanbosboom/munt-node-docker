@@ -1,5 +1,7 @@
 FROM ubuntu:22.04 AS build
 
+ARG BUILD_JOBS=1
+
 RUN apt-get update && apt-get install -y \
     git build-essential libtool autotools-dev automake pkg-config bsdmainutils curl ca-certificates \
     python3 cmake gperf \
@@ -14,7 +16,7 @@ RUN git clone https://github.com/arjanbosboom/munt-official.git munt
 WORKDIR /src/munt
 
 RUN ./autogen.sh
-RUN cd depends && make NO_QT=1 NO_UPNP=1 -j$(nproc)
+RUN cd depends && make NO_QT=1 NO_UPNP=1 -j$(BUILD_JOBS)
 
 RUN mkdir build && cd build && \
     ../configure \
@@ -22,7 +24,7 @@ RUN mkdir build && cd build && \
       --disable-tests \
       --disable-bench \
       --without-gui && \
-    make -j$(nproc)
+    make -j$(BUILD_JOBS)
 
 FROM ubuntu:22.04
 
