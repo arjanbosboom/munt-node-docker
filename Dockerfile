@@ -30,7 +30,8 @@ FROM ubuntu:22.04
 
 RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -r -m -d /home/munt munt
+RUN groupadd -g 1000 munt && \
+    useradd -u 1000 -g munt -m -d /home/munt munt
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
