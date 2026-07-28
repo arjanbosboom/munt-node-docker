@@ -7,11 +7,8 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /src
 
-# Temporary source repository:
-# We currently clone from the maintainer fork because it contains changes
-# that are still pending merge in the official upstream repository.
-# Official upstream: https://github.com/muntorg/munt-official
-RUN git clone https://github.com/arjanbosboom/munt-official.git munt
+# Official repository of Munt
+RUN git clone https://github.com/muntorg/munt-official.git munt
 
 WORKDIR /src/munt
 

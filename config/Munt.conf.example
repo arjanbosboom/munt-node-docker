@@ -1,15 +1,37 @@
+# Core behavior
 server=1
+# Enable inbound P2P connections
 listen=1
+# Keep foreground mode for Docker (PID 1 process)
 daemon=0
 
+# P2P network port
 port=9231
+# JSON-RPC port
 rpcport=9232
 
+# Optional bootstrap peers
 addnode=node1.abyte.eu
 addnode=node2.abyte.eu
 addnode=188.166.12.74
 
+# RPC security:
+# - Keep Docker port mapping to 127.0.0.1 on the host unless you really need remote RPC.
+# - Narrow rpcallowip to your exact management host/subnet where possible.
 rpcbind=0.0.0.0
 rpcallowip=172.16.0.0/12
+# Example tighter alternatives:
+# rpcallowip=172.16.10.25/32
+# rpcallowip=172.16.10.0/24
+
+# Network/runtime hardening
+# Restrict networking to IPv4
+onlynet=ipv4
+# Cap peer count to reduce resource usage
+maxconnections=64
+# Ban score threshold for misbehaving peers
+banscore=100
+
+# RPC authentication credentials
 rpcuser=muntuser
 rpcpassword=change-this-long-random-password
